@@ -21,8 +21,11 @@ from django.conf import settings
 from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',views.home), #if no path is provided, just the website, then it calls views.home
-    path('home/',views.home), # if the /home path is reached, it calls view.home as well
-    path('message/',views.message)
+    path('', views.home, name="home"), # if the / path is reached, it calls view.home as well
+    path('message/',views.message,name="employee_list"), # if the message/ path is reached, it calls view.message as well 
+    path('message/employees/',include('EmployeeApp.urls')) # if the message/employees path is reached, it calls the urls.py in EmployeeApp
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
+#/message path is executing on the project level, not on the EmployeeApp level. But in the django, we say message/
+#/message/employees path is executing on the EmployeeApp level, not on the project level
+#/message/employees/1 path is executing on the EmployeeApp level, not on the project level

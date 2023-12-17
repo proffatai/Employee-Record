@@ -3,7 +3,7 @@ from django.shortcuts import render
 from EmployeeApp.models import employees
 
 def home(request):
-    return HttpResponse("Hello") # we can return an html or we say, render an html file
+    return HttpResponse("Hello, world. You're at the polls index.")
 
 def message(request):
     emp = employees.objects.all() #this is to return all the objects as a set

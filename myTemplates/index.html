@@ -18,8 +18,7 @@
             <thead>
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">Firstname</th>
-                <th scope="col">Lastname</th>
+                <th scope="col">Fullname</th>
                 <th scope="col">Designation</th>  
                 <th scope="col">Phone number</th>
           
@@ -29,8 +28,7 @@
               {% for i in employee%}
               <tr>
                 <th scope="row">{{forloop.counter}}</th>
-                <td>{{i.firstname}}</td>
-                <td>{{i.lastname}}</td>
+                <td>{{i.firstname}}  {{i.lastname}}</td>
                 <td>{{i.designation}}</td>
                 <td>{{i.phonenumber}}</td>
               </tr>

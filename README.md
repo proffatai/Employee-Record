@@ -200,3 +200,49 @@ We can just wrap this line of code inside the html file where we want to use the
 NB: to print dynamic numbers that can be used as id, we can use JS default for loop counter by writing `forloop.counter`
 
 Finally, we can go to the admin panel to add more data and we can also remove any one of our choice.
+
+## To build the employee details page so that it appears when user clicks on the fullname of the employee
+
+To build a new feature, we have to envision the kind of url pattern that will be needed. Here we want to see the details of each employee, so we should have a path like /employee/id, where id is the id of the employee that will be clicked, by so doing, we can pass the id as a parameter to the function that will be called when the user clicks on the name of the employee.
+
+Now we need to proceed to the project urls.py since all the requests initially comes to this file. We now add a path `employee/` to the urlspattern variable as     `path('employee/',include('EmployeeApp.urls'))`,Meaning   if the /employee path is reached, it calls the urls.py in EmployeeApp.
+PS: we need to create urls.py inside the app and we have to import include from django.urls into the file. We must use include() if we want to forward the request into an app that we created in the project. But if the path that we wanna route to is in the project already, we just need to write the path in the urlspattern variable.
+
+Now inside urls.py file of the app, we will import path and include the code
+
+```urlpatterns = [
+path('<int:id>/', views.employee_detail), #when any integer is passed as the path to the url, employee_detail function is called with the id as the argument
+]```
+
+where <int:id>, is stating that we are expecting a random integer number that we could be1,2,3,etc, so we used id to denote it. If we wrote only id, it means we are expecting a string value. Now when the id path is reached, we call the function employee_details from views of EmployeeApp
+
+For the view.py inside the EmployeeApp, we can create the employee_details () as below and also import these modules:
+
+from django.shortcuts import get_object_or_404, render
+from .models import employees
+def employee_detail(request, id,context): # asides taking request as a parameter, we have to pass id since we are expecting it to be able to identify each employee
+    emp=get_object_or_404(employees, pk=id) # we have to pass the class name [the class where the model were created] and pk=id, pk is the primary key of the object. pk is a unique identifier of each object. We just need to pass something else which i called id
+     #we are getting the object one at a time OR 404 means when the object does not exist, it throws a 404 error
+    return render(request, 'employee_detail.html', context) # Now we are displaying the employee_detail.html file when the path is reached. We need to create an employee_detail.html file inside the templates folder of the app.
+  
+  ## We want to render the employee page by creating employee_detail.html file
+
+  We have to create employee_detail.html file inside the templates folder.  We can design the page to display a card and we can use the bootstrap card by searching `bootstrap card` that has image on google and then pasting the code from bootstrap into our code
+
+From the bootstrap we got, we did some modifications, by browing how to centralize the div
+
+    <div class="card mx-auto" style="width: 18rem; margin: 0 auto;">
+        <h3>{{employee}} Details</h3> #here we displayed the employee's fullname as the title. We could have used `<h3>{{employee.firstname}} {{employee.lastname}} Details</h3>`
+        <img class="card-img-top" src="{{employee.photo.url}}" alt="Card image cap"> # to get the image, we need to call the object and then acces the photo but since image is stored in the database, we need to call the photo.url to get the image.
+        <div class="card-body">
+          <h5 class="card-title">{{employee.fullname}}</h5>
+          <p class="card-text">{{employee.designation}}</p>
+          <p class="card-text">{{employee.email}}</p>
+          <p class="card-text">{{employee.phonenumber}}</p>
+          <a href="{% url 'employee_list'%} " class="btn btn-primary">Go Back</a>
+        </div>
+      </div>
+
+For the back button, we can browse how to implement it and put it in the code as follows:
+We passed, `{% url 'employee_list'%}` as the href attribute of the button. We have to pass the url of the page that we want to go back to. We can use the url of the page that we want to go back to by using the `{% url 'employee_list'%}` since we have given a name=employee_list in the project urlspattern for the employees path
+
