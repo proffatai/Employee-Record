@@ -29,3 +29,6 @@ urlpatterns = [
 #/message path is executing on the project level, not on the EmployeeApp level. But in the django, we say message/
 #/message/employees path is executing on the EmployeeApp level, not on the project level
 #/message/employees/1 path is executing on the EmployeeApp level, not on the project level
+
+urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
