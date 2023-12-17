@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-cs@1_)j^+^96x=s5@dz2*56e6h=&ap+7li!s=&#=lw$!f7djhh'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.vercel.app','now.sh','127.0.0.1','localhost']
 
 
 # Application definition
@@ -76,8 +76,12 @@ WSGI_APPLICATION = 'Employee.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'railway',
+        'USER': 'postgres',
+        'PASSWORD': 'DB4Aa3fEEc-32Ede4fEf4A6c6AebgCEa',
+        'HOST': 'roundhouse.proxy.rlwy.net',
+        'PORT': '40986',
     }
 }
 
@@ -126,3 +130,7 @@ STATICFILES_DIRS=[os.path.join(BASE_DIR,'Employee/static')]
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 MEDIA_URL = '/media/'
+
+
+STATICFILES_DIRS = os.path.join(BASE_DIR, 'static'),
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
