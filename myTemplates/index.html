@@ -28,7 +28,7 @@
               {% for i in employee%}
               <tr>
                 <th scope="row">{{forloop.counter}}</th>
-                <td>{{i.firstname}}  {{i.lastname}}</td>
+                <td><a href="{% url 'profile' i.id%}">{{i.firstname}}  {{i.lastname}}</td></a>
                 <td>{{i.designation}}</td>
                 <td>{{i.phonenumber}}</td>
               </tr>
