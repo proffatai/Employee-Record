@@ -246,3 +246,13 @@ From the bootstrap we got, we did some modifications, by browing how to centrali
 For the back button, we can browse how to implement it and put it in the code as follows:
 We passed, `{% url 'employee_list'%}` as the href attribute of the button. We have to pass the url of the page that we want to go back to. We can use the url of the page that we want to go back to by using the `{% url 'employee_list'%}` since we have given a name=employee_list in the project urlspattern for the employees path
 
+## Adding feature to enable user click the name of the employee and then opens the employees details page.
+
+Firstly, we need to name the employee details page inside the app urls.py, I named it profiles so that I can easily redirect to it as seen below
+`path('<int:id>/', views.employee_detail, name="profile")`
+
+Now inside the index.html file, we need to wrap the names of the employee inside an anchor tag and for the href, we have to pass a url to the employee_detail page which has been dubbed as profile, as well as the id of that employee. As seen below
+  `<td><a href="{% url 'profile' i.id%}">{{i.firstname}}  {{i.lastname}}</td></a>`
+
+
+id is an implicit attribute that the object of the class has
