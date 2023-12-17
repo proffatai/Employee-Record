@@ -10,3 +10,6 @@ class employees(models.Model):
     photo=models.ImageField(upload_to= "images") 
     created_at=models.DateTimeField(auto_now_add = True)
     updated_at=models.DateTimeField(auto_now = True)
+
+    def __str__(self):
+        return self.firstname +" "+self.lastname #this is done so that we can represent each record with the firstname and last name on the admin panel

@@ -170,3 +170,33 @@ MEDIA_URL = '/media/'
 In doing this, when we upload any file, this file will be stored inside the media directory and not the root folder anymore. Before this can work, we need to append the following line to the urlspattern variable inside the urls.py file: +static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT). And then import settings and static at the top of the file
 
 By doing all these, we can now upload files into the web app and we will be able to view it.
+
+## Using the backend data on the frontend
+First thing is to go the templates folder and create a folder named `employees` inside it. Then inside this folder, we will create a file named `index.html` and inside this file, we will write the code to display the data that we have stored in the DB as follows. open the views.py file of the project that has the function to be called when the user visits a certain page. In this case, locate the message() since that is where we want to display the records coming from the DB/Backend.
+
+When we want to fetch data from a model, we first go inside the model then .objects to get each of the object and a query of our choice e.g    `employees.objects.all()` meaning we want all the objects from the emloyees object. PS: we must import this file inside the views.py file  
+
+Inside views.py file where we wrote the command to be called when the path /message is visited
+def message(request):
+    emp = employees.objects.all() 
+    context = {'employee':emp} # This holds the all the objects as a key value pair stored in a variable context. Also, emp is stored inside employee variable and we can use employee inside the index.html file
+    return render(request, 'index.html', context)
+
+### Printing python variable inside html file
+
+{% for e in employee %}# to print out a block of code
+actions are here
+{% endfor %}  #we have to close the for loop
+{% %} this is called template tag.It tells the interpreter that here comes something other than a plain html
+{{variableName}} #double curly braces to print variable. It is called template variable
+e.g {{employee}} #this will print all the values of emp.  
+
+We can just wrap this line of code inside the html file where we want to use the data without importing anything:
+{% for i in employee%}
+{{i}} #to print all the objects 
+{{i.fieldname}} # to display a specific field whether firstname or lastname etc
+{% endfor %} 
+
+NB: to print dynamic numbers that can be used as id, we can use JS default for loop counter by writing `forloop.counter`
+
+Finally, we can go to the admin panel to add more data and we can also remove any one of our choice.

@@ -18,33 +18,29 @@
             <thead>
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
+                <th scope="col">Firstname</th>
+                <th scope="col">Lastname</th>
+                <th scope="col">Designation</th>  
+                <th scope="col">Phone number</th>
+          
               </tr>
             </thead>
             <tbody>
+              {% for i in employee%}
               <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
+                <th scope="row">{{forloop.counter}}</th>
+                <td>{{i.firstname}}</td>
+                <td>{{i.lastname}}</td>
+                <td>{{i.designation}}</td>
+                <td>{{i.phonenumber}}</td>
               </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td colspan=" 2">Larry the Bird</td>
-                <td>@twitter</td>
-              </tr>
+              {% endfor %}
             </tbody>
           </table>
           <img src="{% static 'assets/elders.png' %}" alt="Elderly">
     </div>
   
+
+   
 </body>
 </html>
