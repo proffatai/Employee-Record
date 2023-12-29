@@ -88,7 +88,7 @@ def home(request): #the function must take in request as a parameter
     return HttpResponse("Hello") #here the function is returning an http response that we must import from django.http module
 
 ### Rendering real html or a page that has html, css and js to the user
-create a folder that holds our templates files inside the root folder of the django project named e.g`myTemplates`.
+create a folder that holds our templates files inside the root folder of the django project named e.g`myTemplates`. In otherwords, the template folder should be at the same level as the manage.py file which is inside the project
 Create your html files `e.g index.html` inside the templates folders
 
 
